@@ -16,7 +16,7 @@ class LivroController extends Controller
 
     public function index()
     {
-        $livros = $this->repository->getAll();
+        return $livros = $this->repository->getAll();
         return response()->json($livros, 200);
     }
 
@@ -24,5 +24,22 @@ class LivroController extends Controller
     {
         $livroCriado = $this->repository->create($request);
         return response()->json($livroCriado, 201);
+    }
+
+    public function destroy($id)
+    {
+        return $this->repository->delete($id);
+    }
+
+    public function update(LivroRequest $request, $id)
+    {
+        $livroEditado = $this->repository->update($request, $id);
+        return response()->json($livroEditado);
+    }
+
+    public function show($id)
+    {
+        $livro = $this->repository->show($id);
+        return response()->json($livro);
     }
 }

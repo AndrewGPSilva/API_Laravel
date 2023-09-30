@@ -2,7 +2,9 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -25,6 +27,23 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             //
+        });
+
+        $this->renderable(function (Throwable $e, $request) {
+            if ($e instanceof ValidationException) {
+                return response()->json([
+                    'message' => 'Erro de validação',
+                    'errors' => $e->validator->getMessageBag(),
+                ], 422);
+            }
+        });
+
+        $this->renderable(function (Throwable $e, $request) {
+            if ($e instanceof ModelNotFoundException) {
+                return response()->json([
+                    'message' => 'ID passado não encontrado!',
+                ], 404);
+            }
         });
     }
 }

@@ -10,3 +10,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get("/livros", [LivroController::class, 'index']);
 Route::post("/livros", [LivroController::class, 'create']);
+Route::get("/livros/{id}", [LivroController::class, 'show']);
+Route::delete("/livros/{id}", [LivroController::class, 'destroy']);
+Route::put("/livros/{id}", [LivroController::class, 'update']);
