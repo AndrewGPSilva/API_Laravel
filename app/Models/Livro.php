@@ -13,5 +13,5 @@ class Livro extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['nome', 'autor', 'categoria'];
+    protected $fillable = ['nome', 'autor', 'categoria', 'imagem'];
 }

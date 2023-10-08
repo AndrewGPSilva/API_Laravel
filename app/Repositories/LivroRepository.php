@@ -22,7 +22,6 @@ class LivroRepository
         return $livros;
     }
 
-
     public function create(LivroRequest $request)
     {
         try {
@@ -65,11 +64,11 @@ class LivroRepository
     {
         try {
             $livro = $this->model->findOrFail($id);
-            return response()->json(["message" => "Livro encontrado", $livro], 200);
+            return response()->json(["message" => "Livro encontrado", "livro" => $livro], 200);
         } catch (ModelNotFoundException $e) {
             return response()->json(["message" => "Livro não encontrado"], 404);
         } catch (\Exception $e) {
-            return response()->json(["message" => "Erro ao encontrar livro" . $e->getMessage()], 404);
+            return response()->json(["message" => "Erro ao remover o livro: " . $e->getMessage()], 500);
         }
     }
 }
