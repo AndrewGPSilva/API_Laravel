@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Exceptions\BookNotFound;
 use App\Http\Requests\LivroRequest;
 use App\Models\Livro;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -60,15 +61,14 @@ class LivroRepository
         }
     }
 
-    public function show($id)
+    public function show(int $id)
     {
         try {
             $livro = $this->model->findOrFail($id);
-            return response()->json(["message" => "Livro encontrado", "livro" => $livro], 200);
-        } catch (ModelNotFoundException $e) {
-            return response()->json(["message" => "Livro não encontrado"], 404);
-        } catch (\Exception $e) {
-            return response()->json(["message" => "Erro ao remover o livro: " . $e->getMessage()], 500);
+        } catch (BookNotFound $e) {
+            throw new BookNotFound($id);
         }
+
+        return response()->json(['livro'=> $livro]);
     }
 }
