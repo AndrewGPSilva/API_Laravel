@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LivroRequest;
+use App\Models\Livro;
 use App\Repositories\Livroservice;
 use App\Services\LivroService as ServicesLivroService;
 
@@ -42,5 +43,11 @@ class LivroController extends Controller
     {
         $livro = $this->service->show($id);
         return response()->json($livro);
+    }
+
+    public function order()
+    {
+        $livro = Livro::orderBy('nome')->get();
+        return response()->json(["message"=> "Ordenado por ordem alfábetica!", $livro]);
     }
 }

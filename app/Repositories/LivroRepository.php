@@ -19,7 +19,7 @@ class LivroRepository
 
     public function getAll()
     {
-        $livros = $this->model->orderBy('nome')->get();
+        $livros = $this->model->all();
         return $livros;
     }
 
