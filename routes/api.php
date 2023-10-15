@@ -9,7 +9,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get("livros/orderbynome", [LivroController::class, 'orderbynome']);
-Route::get("livros/orderbybycategoria", [LivroController::class, 'orderbycategoria']);
+Route::get("livros/orderbycategoria", [LivroController::class, 'orderbycategoria']);
 Route::get("livros/orderbyautor", [LivroController::class, 'orderbyautor']);
 Route::get("/livros", [LivroController::class, 'index']);
 Route::post("/livros", [LivroController::class, 'create']);
