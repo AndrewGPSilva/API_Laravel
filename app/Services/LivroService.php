@@ -36,4 +36,19 @@ class LivroService
     {
         return $this->repository->show($id);
     }
+
+    public function bynome()
+    {
+        return $this->repository->bynome();
+    }
+
+    public function bycategoria()
+    {
+        return $this->repository->bycategoria();
+    }
+
+    public function byautor()
+    {
+        return $this->repository->byautor();
+    }
 }

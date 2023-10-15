@@ -71,4 +71,22 @@ class LivroRepository
 
         return response()->json(['livro'=> $livro]);
     }
+
+    public function bynome()
+    {
+        $livros = $this->model->orderBy('nome')->get();
+        return $livros;
+    }
+
+    public function bycategoria()
+    {
+        $livros = $this->model->orderBy('categoria')->get();
+        return $livros;
+    }
+
+    public function byautor()
+    {
+        $livros = $this->model->orderBy('autor')->get();
+        return $livros;
+    }
 }
