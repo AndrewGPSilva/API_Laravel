@@ -19,7 +19,7 @@ class LivroRepository
 
     public function getAll()
     {
-        $livros = $this->model->all();
+        $livros = $this->model->orderBy('nome')->get();
         return $livros;
     }
 
@@ -66,7 +66,7 @@ class LivroRepository
         try {
             $livro = $this->model->findOrFail($id);
         } catch (BookNotFound $e) {
-            throw new BookNotFound($id);
+            return response()->json(['message' => $e->getMessage()], 404);
         }
 
         return response()->json(['livro'=> $livro]);
